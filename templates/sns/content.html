@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{#게시물#}
+<h1>{{ question.subject }}</h1>
+<h2>작성자 : {{ question.name }}</h2>
+<div>
+    {{ question.content }}
+</div>
+
+{#댓글#}
+<h5>{{ question.answer_set.count }}개의 댓글이 있습니다.</h5>
+<div>
+    <ul>
+        {% for answer in question.answer_set.all %}
+            <li>
+                <ol>
+                    작성자 : {{ answer.name }}
+                </ol>
+                <ol>
+                    {{ answer.content }}
+                </ol>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{#댓글등록#}
+<form action="{% url 'sns:answer_create' question.id %}" method="post">
+    {% csrf_token %}
+    <label>작성자 : <input name="name"></label>
+    <textarea name="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
+
+</body>
+</html>
