@@ -3,17 +3,27 @@ from django.utils import timezone
 from .models import Question, Answer
 from .forms import QuestionForm
 from trans.views import pj_name_load
-
+#페이징
+from django.core.paginator import Paginator
 filenames = pj_name_load()
 
 #게시글 목록
 def index(request):
     question_list = Question.objects.order_by('-create_date')
-    return render(request, 'sns/sns.html', {'question_list': question_list, 'file_list': filenames})
+    page = request.GET.get('page', '1')  # 페이지
+    paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+
+    return render(request, 'sns/index.html', {'file_list': filenames,
+                                              'question_list': page_obj})
 
 #게시글 내용
 def contents(request, content_id):
     question = get_object_or_404(Question, pk=content_id)
+    question.click()
+    #조회수
+    # question.clik_num += 1
+    # question.save()
     return render(request, 'sns/content.html', {'question': question, 'file_list': filenames})
 
 #답글 기능

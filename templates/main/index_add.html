@@ -5,74 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Test Test Title</title>
-
-  <!--파비콘-->
-  <!--<link rel="shortcut icon" href="favicon.ico" />-->
-  <link rel="icon" href="./favicon.png" />
-  <!--브라우저 스타일 초기화-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
-  <!--Google Fonts - 나눔고딕-->
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
-  <!--Google Material Icons-->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!--파비콘-->
+    <!--<link rel="shortcut icon" href="favicon.ico" />-->
+    {% load static %}
+    <link rel="icon" href="{% static './img/favicon.png' %}" />
+    <!--브라우저 스타일 초기화-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <!--Google Fonts - 나눔고딕-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+    <!--Google Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     {% load static %}
     <link rel="stylesheet" href="{% static './css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static './css/translate.css' %}"/>
+
 </head>
+
 <body>
 
-  <!--HEADER-->
-  <header>
+<!--HEADER-->
+<header>
     <div class="inner">
 
-      <a href="/" class="logo">
-          <img src="{% static './img/favicon.png' %}" alt="STARBUCKS"/>
-      </a>
+        <a href="/" class="logo">
+            <img src="{% static './img/favicon.png' %}" alt="MAIN"/>
+        </a>
 
-      <div class="sub-menu">
-        <ul class="menu">
-          <li>
-            <a href="https://github.com/">Sign In</a>
-          </li>
-          <li>
-            <a href="https://www.adobe.com/kr/acrobat/online/convert-pdf.html">Login</a>
-          </li>
-        </ul>
-          <div class="search">
-              <input type="text" />
-              <span class="material-icons">search</span>
-          </div>
-      </div>
+        <div class="sub-menu">
+            <ul class="menu">
+                <li>
+                    <a href="https://github.com/">Sign In</a>
+                </li>
+                <li>
+                    <a href="https://www.adobe.com/kr/acrobat/online/convert-pdf.html">Login</a>
+                </li>
+            </ul>
+            <div class="search">
+                <input type="text" />
+                <span class="material-icons">search</span>
+            </div>
+        </div>
         <ul class="main-menu">
             <li class="item">
                 <div class="item__name">
                     <a href="{% url 'sns:index' %}">게시판</a>
                 </div>
+            </li>
             <li class="item">
-                <div class="item__name">번역 추가
-                    <div class="item__contents">
-                        <div class="contents__menu">
-                            <ul class="inner">
-                                {% for item in file_list %}
-                                    <li>
-                                        <a href="{% url 'trans:add' item %}">{{ item }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+                <div class="item__name">
+                    <a href="{% url 'trans:lists' %}">프로젝트 목록</a>
                 </div>
             </li>
-            </li>
             <li class="item">
-                <div class="item__name">번역
+                <div class="item__name">번역 등록하기
                     <div class="item__contents">
                         <div class="contents__menu">
                             <ul class="inner">
                                 {% for item in file_list %}
-                                    <li>
-                                        <a href="{% url 'trans:tr' item %}">{{ item }}</a>
-                                    </li>
+                                <li>
+                                    <a href="{% url 'trans:add' item %}">{{ item }}</a>
+                                </li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -80,26 +73,41 @@
                 </div>
             </li>
             <li class="item">
-                <div class="item__name"><a href="/">ABOUT</a></div>
+                <div class="item__name">번역 문구 찾기
+                    <div class="item__contents">
+                        <div class="contents__menu">
+                            <ul class="inner">
+                                {% for item in file_list %}
+                                <li>
+                                    <a href="{% url 'trans:tr' item %}">{{ item }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="item__name"><a href="{% url 'trans:about_sc' %}">ABOUT</a></div>
             </li>
         </ul>
     </div>
 
-  </header>
-
+</header>
 
   <form method="POST">
       {% csrf_token %}
       <!--VISUAL-->
       <section class="visual">
           <div class="inner">
+            <div class="title_name"> Title : {{file_name}}</div>
               <div class="write_box">원문</div>
               <label for="data_inp">
-                  <textarea class="write_text" id="inp" name="inps"></textarea>
+                  <textarea rows="15" cols="28" class="write_text" id="inp" name="inps"></textarea>
               </label>
               <div class="translated_box">번역문</div>
               <label for="data_oup">
-                  <textarea class="translated_text" id="oup" name="oups"></textarea>
+                  <textarea rows="15" cols="28" class="translated_text" id="oup" name="oups"></textarea>
               </label>
               <button type="submit" class="material-icons">send</button>
           </div>
@@ -107,54 +115,6 @@
   </form>
 
 
-<!--explain something-->
-<div class="container">
-  
-  <div class="box">
-    <p>
-      1. 과제 추진배경<br><br>
-          코드와 스크립트(텍스트)가 섞여있는 게임과 같은 문서를 번역할 때 버전업이 되면서
-          <br> 기존 번역문서를 날리고 <br> 처음부터 다시 번역해야 하는 문제가 존재한다.<br>
-      <br>  
-          이 프로젝트를 이용하여 <br> 한번 번역된 문서는 다음에도 그대로 번역할 수 있게끔 <br> 저장
-          된 텍스트를 변환해 주는 프로그램을 개발하고자 한다.
-        </p>
-  </div>
-  
-     <div class="box">
-        <p>
-          2. 과제(주제) 목표 및 내용<br> 
-          <br> 
-          한번 번역된 문장들을 서버에 등록해 놓고 소스파일을 서버에 전송하면 자동으로 
-          등록된 문장만 번역해준다.<br> <br> 
-          웹 프레임 워크로는 Django를 사용하고 기능적인 부분은 Python으로 구현한다.<br> 
-          <br> 
-          웹은 Css와 javaScript 로<br>  구현하고 데이터시트는 Json형식으로 구현한다.<br> 
-          
-        </p>
-  </div>
-
-   <div class="box">
-        <p>
-          시간이 남는다면 회원기능을 추가해서 각 유저별로 데이터를 관리할 수 있게 한다.<br><br>
-          유저별로 데이터를 관리할때는 github와 같이 <br> 팀을 이루어 작업할 수 있게끔
-          그룹작업 기능을 구현한다.<br><br>
-          5. 기대효과 및 활용방안<br><br>
-          번역해야될 문장과 <br>번역하지 않아야 할 문장이 <br>섞여있는 텍스트 모음<br>(대표적으로게임)에서<br> 다시 번역하지 않아도 된다.<br><br>
-          
-        </p>  
-       </div>
-
-  <div class="box">
-    <p>
-      이로부터 번역 작업을 하는 사용자의 노동과 시간 단축을 기대할 수 있다.<br><br>
-자금 사정이 열악한 <br>인디게임 제작에 협력하여<br> 각종 언어로 쉽게<br> 번역할 수 있게 
-      지원하여 <br> 초기 개발비용을 줄여주는 <br> 효과를 낼 수 있다.<br><br>
-          또한 외국어로 이루어진 게임의 경우 철저히 개인번역에만 기대야 하는데<br> 이를 팀을
-          이루어 번역하기 쉽게끔 서비스를 제공한다.
-       </p>  
-       </div>
-</div>
 
   
   <section class="explain">

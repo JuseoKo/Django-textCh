@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .transdata import data_compare, data_add, add_f
 import os
 
@@ -30,7 +30,7 @@ def main(request, file_name):
         out_data = data_compare(data, file_name)
         return render(request, 'main/index.html', {'out_data': out_data, 'file_list': filenames})
     else:
-        return render(request, "main/index.html", {'file_list': filenames})
+        return render(request, "main/index.html", {'file_name': file_name, 'file_list': filenames})     # ++++
 
 #번역등록페이지
 def main_add(request, file_name):
@@ -47,16 +47,30 @@ def main_add(request, file_name):
 
         return render(request, 'main/index_add.html', {'file_name': file_name, 'file_list': filenames})
     else:
-        return render(request, 'main/index_add.html', {'file_name': file_name, 'file_list': filenames})
+        return render(request, 'main/index_add.html', {'file_name': file_name, 'file_list': filenames})     # ++++
 
 def pj_add(request):
+    filenames = pj_name_load()
     if request.method == 'POST':
         pj_name = request.POST['pj_add']
-        add_f(pj_name)
-        return redirect('about')
-    else:
-        return redirect('about')
 
+        # ++++
+        if pj_name == '':
+            pj_name = ' '
+        # ++++
+
+        add_f(pj_name)
+        return render(request, './about/about.html', {'file_list': filenames, 'added_pj': pj_name})     # ++++
+    else:
+        return render(request, './about/about.html', {'file_list': filenames})
+
+def lists(request):
+    filenames = pj_name_load()
+    return render(request, './about/project_list.html', {'file_list': filenames,})
+
+def about_sc(request):
+    filenames = pj_name_load()
+    return render(request, './about/about_about.html', {'file_list': filenames,})
 
 
 #return render(request, 'main/main.html') : 요청이 들어오면 main/main.html을 보여줘라
