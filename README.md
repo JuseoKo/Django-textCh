@@ -1,7 +1,7 @@
 ### content
 ---
 1. 텍스트변환기 웹으로 구현
-2. 간단한 게시판
+2. crud 게시판
 
 ### stack
 <img src="https://img.shields.io/badge/Django-092E20?&logo=Django&logoColor=white">
