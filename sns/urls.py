@@ -15,5 +15,7 @@ urlpatterns = [
     path('answer/create/<int:question_id>/', views.answer_create, name='answer_create'),
     #게시글 작성
     path('create/', views.sns_create, name='sns_create'),
+    #수정 페이지로 넘어가게
+    path('revise/<int:question_id>/', views.revise, name='revise_page'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -145,7 +145,7 @@
                                                 <th scope="row">
                                                     <label for="subject" class="sib-require"><em class="hd-element">필수입력항목</em>제목</label>
                                                 </th>
-                                                <td><input type="text" name="subject" id="subject" class="sib-wte-input-subject"></td>
+                                                <td><input type="text" name="subject" id="subject" class="sib-wte-input-subject" VALUE="{{ question.subject }}"></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
@@ -153,7 +153,7 @@
                                                 </th>
                                                 <td>
                                                     <input type="hidden" name="userId" id="userId" value="">
-                                                    <input type="text" name="name" id="name" class="sib-wte-input-name">
+                                                    <input type="text" name="name" id="name" class="sib-wte-input-name" value="{{ question.name }}">
                                                 </td>
                                             </tr>
                                             <tr class="passwordTr">
@@ -161,25 +161,25 @@
                                                     <label for="password" class="sib-require"><em class="hd-element">필수입력항목</em>비밀번호</label>
                                                 </th>
                                                 <td>
-                                                    <input type="password" name="su_password" id="password" value="" class="sib-wte-input-name">
-                                                    <span class="sib-wte-type-basic-summary">수정 및 삭제 확인 시 반드시 필요합니다.</span>
+                                                    <input type="password" name="password" id="password" value="" class="sib-wte-input-name">
+                                                    <span class="sib-wte-type-basic-summary">글 작성시 입력한 비밀번호를 입력하세요</span>
                                                 </td>
                                             </tr>
-                                            <tr class="passwordTr">
-                                                <th scope="row">
-                                                    <label for="passwordCheck" class="sib-require"><em class="hd-element">필수입력항목</em>비밀번호 확인</label>
-                                                </th>
-                                                <td>
-                                                    <input type="password" name="passwordCheck" id="passwordCheck" value="" class="sib-wte-input-name">
-                                                    <span class="sib-wte-type-basic-summary">수정 및 삭제 확인 시 반드시 필요합니다.</span>
-                                                </td>
-                                            </tr>
+{#                                            <tr class="passwordTr">#}
+{#                                                <th scope="row">#}
+{#                                                    <label for="passwordCheck" class="sib-require"><em class="hd-element">필수입력항목</em>비밀번호 확인</label>#}
+{#                                                </th>#}
+{#                                                <td>#}
+{#                                                    <input type="password" name="passwordCheck" id="passwordCheck" value="" class="sib-wte-input-name">#}
+{#                                                    <span class="sib-wte-type-basic-summary">수정 및 삭제 확인 시 반드시 필요합니다.</span>#}
+{#                                                </td>#}
+{#                                            </tr>#}
                                             <tr>
                                                 <th scope="row">
                                                     <label for="content" class="sib-require"><em class="hd-element">필수입력항목</em>내용</label>
                                                 </th>
                                                 <td>
-                                                    <textarea name="content" rows="10" cols="10" id="content" placeholder="내용을 입력해 주세요"></textarea>
+                                                    <textarea name="content" rows="10" cols="10" id="content" placeholder="내용을 입력해 주세요">{{ question.content }}</textarea>
                                                     <span style="color:#aaa;float:right" id="counter">(0자)</span>
                                                 </td>
                                             </tr>
@@ -198,7 +198,7 @@
                                     </table> 
                                     
                                     <div class="sib-set-button">
-                                        <button type="submit" class="sib-button sib-lb-color2" id="btnUpload">확인</button>&nbsp;<a href="#" class="sib-button sib-lb-color1" id="btnUploadCancle">취소</a>
+                                        <button type="submit" class="sib-button sib-lb-color2" id="btnUpload">수정</button>&nbsp;<a href="#" class="sib-button sib-lb-color1" id="btnUploadCancle">취소</a>
                                     </div>
                                 </fieldset>
                             </form>

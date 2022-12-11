@@ -5,7 +5,11 @@ from .forms import QuestionForm
 from trans.views import pj_name_load
 #페이징
 from django.core.paginator import Paginator
+
+from django.db.models import Max
 filenames = pj_name_load()
+
+
 
 #게시글 목록
 def index(request):
@@ -28,7 +32,6 @@ def contents(request, content_id):
 
 #답글 기능
 def answer_create(request, question_id):
-    #에러메세지 설정
     question = get_object_or_404(Question, pk=question_id)
     answer = Answer(question=question, content=request.POST['content'], name=request.POST['name'],
                     create_date=timezone.now())
@@ -38,14 +41,35 @@ def answer_create(request, question_id):
 
 #글쓰기 기능
 def sns_create(request):
+    #작성확인 버튼 누를시
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
             question.create_date = timezone.now()
+            question.con_num = int(list(Question.objects.aggregate(Max('con_num')).values())[0]) + 1
             question.save()
             return redirect('sns:index')
+    #페이지 오픈시
     else:
         form = QuestionForm()
     context = {'form': form}
     return render(request, 'sns/sns_create.html', context)
+
+#글 수정 기능
+def revise(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.method == 'POST':
+        if question.su_password == request.POST['password']:
+            question.subject = request.POST['subject']
+            question.name = request.POST['name']
+            question.content = request.POST['content']
+            question.create_date = timezone.now()
+            question.save()
+            return render(request, 'sns/content.html', {'question': question})
+        else:
+            return render(request, 'sns/content.html', {'question': question})
+        pass
+    else:
+        pass
+        return render(request, 'sns/sns_create_revise.html', {'question': question})
