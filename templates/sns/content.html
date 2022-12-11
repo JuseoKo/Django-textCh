@@ -140,7 +140,7 @@
                         <div class="sib-set-button" data-secret="false" data-writer="an5330">
                             <div class="sib-set-button-right">
                                 <div class="sib-set-button-left"></div>
-                                <a href="{% url 'sns:revise_page' question.id %}" class="sib-button sib-lb-color7" id="btnEdit">수정</a>&nbsp;<a href="#" class="sib-button sib-lb-color6" id="btnDelete">삭제</a>&nbsp;<a href="{% url 'sns:index' %}" class="sib-button sib-lb-color5" id="btnList">목록</a>
+                                <a href="{% url 'sns:revise_page' question.id %}" class="sib-button sib-lb-color7" id="btnEdit">수정</a>&nbsp;<a href="{% url 'sns:del_page' question.id %}" class="sib-button sib-lb-color6" id="btnDelete">삭제</a>&nbsp;<a href="{% url 'sns:index' %}" class="sib-button sib-lb-color5" id="btnList">목록</a>
                             </div>
                         </div>
 
@@ -170,7 +170,8 @@
                                 {% csrf_token %}
                                 <fieldset>
                                     <legend>댓글 작성</legend>
-                                    <label class="sib-viw-board-reply-article-title">작성자 : <input class="inputReply" name="name" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력"></label>
+                                    <label class="sib-viw-board-reply-article-title">작성자 : <input class="inputReply" name="name" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력">
+                                        비밀번호 : <input type="password" class="inputReply" name="password" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력"></label></label>
                                     <textarea class="txReply" name="content" id="bbsCmCn" rows="10" cols="10" title="댓글 입력" placeholder="댓글 작성을 해 주세요"></textarea>
                                     <input type="submit" class="sib-button sib-lb-color2" id="btnMemoSubmit" value="답변등록">
                                 </fieldset>

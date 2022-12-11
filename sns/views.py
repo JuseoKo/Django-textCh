@@ -30,11 +30,11 @@ def contents(request, content_id):
     # question.save()
     return render(request, 'sns/content.html', {'question': question, 'file_list': filenames})
 
-#답글 기능
+#댓글 기능
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     answer = Answer(question=question, content=request.POST['content'], name=request.POST['name'],
-                    create_date=timezone.now())
+                    create_date=timezone.now(), an_password=request.POST['password'])
     answer.save()
     #redirect 와 render의 차이는 redirect 는 링크로 이동시켜주고 render은 html파일을 열어준다.
     return redirect('sns:contents', content_id=question.id)
@@ -53,7 +53,7 @@ def sns_create(request):
     #페이지 오픈시
     else:
         form = QuestionForm()
-    context = {'form': form}
+    context = {'form': form, 'file_list': filenames}
     return render(request, 'sns/sns_create.html', context)
 
 #글 수정 기능
@@ -69,7 +69,16 @@ def revise(request, question_id):
             return render(request, 'sns/content.html', {'question': question})
         else:
             return render(request, 'sns/content.html', {'question': question})
-        pass
     else:
-        pass
-        return render(request, 'sns/sns_create_revise.html', {'question': question})
+        return render(request, 'sns/sns_create_revise.html', {'question': question, 'file_list': filenames})
+
+def dl(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.method == 'POST':
+        if question.su_password == request.POST['password']:
+            question.delete()
+            return redirect('sns:index')
+        else:
+            return redirect('sns:index')
+    else:
+        return render(request, 'sns/sns_create_del.html', {'question': question, 'file_list': filenames})

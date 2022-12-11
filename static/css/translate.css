@@ -1,0 +1,72 @@
+/*VISUAL*/
+.visual {
+  margin-top: 120px;
+  background-position: center;
+  background-color: #f8f8f8;
+}
+.visual .inner {
+  height: 686px;
+}
+
+.visual .title_name {
+  font-size: 40px;
+  padding: 3%;
+  margin: 3% 1% 2% 1%;
+}
+
+.visual .write_box {
+  border-radius: 10px;
+  background-color: #FFF;
+  position: absolute;
+  border:5px dashed #e5e5e5; padding:20px;
+  top: 128px;
+  left: -10px;
+  bottom: 88px;
+  right: 550px;
+  text-align: center;
+}
+
+.visual .write_text{
+  background-color: #FFF;
+  position: absolute;
+  border:1px solid #e5e5e5; padding:10px;
+  top: 190px;
+  left: 15px;
+  bottom: 110px;
+  right: 580px;
+  text-align: left;
+}
+.visual .translated_box {
+  border-radius: 10px;
+  background-color: #FFF;
+  position: absolute;
+  border:5px dashed #e5e5e5; padding:20px;
+  top: 128px;
+  left: 550px;
+  bottom: 88px;
+  right: -10px;
+  text-align: center;
+}
+.visual .translated_text{
+  background-color: #FFF;
+  position: absolute;
+  border:1px solid #e5e5e5; padding:10px;
+  top: 190px;
+  left: 575px;
+  bottom: 110px;
+  right: 20px;
+  text-align: left;
+}
+.visual .material-icons {
+  font-size: 48px;
+  border-radius: 1px;
+  background-color: #FFF;
+  border:1px solid #e5e5e5; padding:1px;
+  position: absolute;
+  top: 50%;
+  left: 47.4%;
+}
+.visual .material-icons:hover {
+  cursor: pointer;
+  color: #c8c8c8;
+}

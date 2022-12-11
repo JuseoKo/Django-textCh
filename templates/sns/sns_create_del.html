@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Test Test Title</title>
+
+    <!--파비콘-->
+    <!--<link rel="shortcut icon" href="favicon.ico" />-->
+    <link rel="icon" href="./favicon.png" />
+    <!--브라우저 스타일 초기화-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+    <!--Google Fonts - 나눔고딕-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+    <!--Google Material Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static './css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static './css/sns.css' %}"/>
+    <style>
+        .visual {
+            background-color: white;
+        }
+        .title-wrap {
+            border-collapse: collapse ;
+            position: center ;
+            padding: 1%;
+            position: relative;
+            font-size: 40px;
+        }
+        #h5 {
+            border-collapse: collapse ;
+            position: center ;
+            padding: 5%;
+        }        
+    </style>
+</head>
+<body>
+
+<!--HEADER-->
+<header>
+    <div class="inner">
+
+        <a href="/" class="logo">
+            <img src="{% static './img/favicon.png' %}" alt="STARBUCKS"/>
+        </a>
+
+        <div class="sub-menu">
+            <ul class="menu">
+                <li>
+                    <a href="https://github.com/">Sign In</a>
+                </li>
+                <li>
+                    <a href="https://www.adobe.com/kr/acrobat/online/convert-pdf.html">Login</a>
+                </li>
+            </ul>
+            <div class="search">
+                <input type="text" />
+                <span class="material-icons">search</span>
+            </div>
+        </div>
+        <ul class="main-menu">
+            <li class="item">
+                <div class="item__name">
+                    <a href="{% url 'sns:index' %}">게시판</a>
+                </div>
+            <li class="item">
+                <div class="item__name">번역 추가
+                    <div class="item__contents">
+                        <div class="contents__menu">
+                            <ul class="inner">
+                                {% for item in file_list %}
+                                    <li>
+                                        <a href="{% url 'trans:add' item %}">{{ item }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            </li>
+            <li class="item">
+                <div class="item__name">번역
+                    <div class="item__contents">
+                        <div class="contents__menu">
+                            <ul class="inner">
+                                {% for item in file_list %}
+                                    <li>
+                                        <a href="{% url 'trans:tr' item %}">{{ item }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="item__name"><a href="/">ABOUT</a></div>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<body>
+    <section style="width:1800px" class="visual">
+        <div class="inner">
+            <!-- 게시판 -->
+            <div id="content" class="content spp-content spp-cont-free">
+                <div class="title-wrap">삭제 비밀번호 입력</div>
+
+
+                <!-- 공통 게시판 start-->
+                {% block content %}
+{#                <div id="seoul-common-board" style="opacity: 1;">#}
+{#                    <div id="seoul-integrated-board" style="width: 700px; max-width: 100%;"> <!-- 글 쓰기, 수정, 답변 -->#}
+{#                        <div class="sib-wte-type-basic">#}
+                            <form name="writeForm" id="writeForm" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                                {% csrf_token %}
+                                <!-- 오류표시 Start -->
+                                {% if form.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for field in form %}
+                                    {% if field.errors %}
+                                    <div>
+                                    <strong>{{ field.label }}</strong>
+                                    {{ field.errors }}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <!-- 오류표시 End -->
+{#                                <fieldset>#}
+{#                                    <legend>게시물 작성</legend>#}
+{#                                    <table class="sib-wte-type-basic noMember">#}
+{#                                        <caption>글쓰기 - 제목, 작성자, 비밀번호, 비밀번호 확인, 내용, 첨부파일을 제출하는 서식 입력 표</caption>#}
+{#                                        <colgroup>#}
+{#                                            <col class="sib-wte-type-basic-title"><col>#}
+{#                                        </colgroup>#}
+{#                                        <tbody>#}
+{#                                            <tr>#}
+{#                                                <th scope="row">#}
+{#                                                    <label for="subject" class="sib-require"><em class="hd-element">필수입력항목</em>제목</label>#}
+{#                                                </th>#}
+{#                                                <td><input type="text" name="subject" id="subject" class="sib-wte-input-subject" VALUE="{{ question.subject }}"></td>#}
+{#                                            </tr>#}
+{#                                            <tr>#}
+{#                                                <th scope="row">#}
+{#                                                    <label for="name" class="sib-require"><em class="hd-element">필수입력항목</em>작성자</label>#}
+{#                                                </th>#}
+{#                                                <td>#}
+{#                                                    <input type="hidden" name="userId" id="userId" value="">#}
+{#                                                    <input type="text" name="name" id="name" class="sib-wte-input-name" value="{{ question.name }}">#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                            <tr class="passwordTr">#}
+{#                                                <th scope="row">#}
+{#                                                    <label for="password" class="sib-require"><em class="hd-element">필수입력항목</em>비밀번호</label>#}
+{#                                                </th>#}
+{#                                                <td>#}
+{#                                                    <input type="password" name="password" id="password" value="" class="sib-wte-input-name">#}
+{#                                                    <span class="sib-wte-type-basic-summary">글 작성시 입력한 비밀번호를 입력하세요</span>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                            <tr class="passwordTr">#}
+{#                                                <th scope="row">#}
+{#                                                    <label for="passwordCheck" class="sib-require"><em class="hd-element">필수입력항목</em>비밀번호 확인</label>#}
+{#                                                </th>#}
+{#                                                <td>#}
+{#                                                    <input type="password" name="passwordCheck" id="passwordCheck" value="" class="sib-wte-input-name">#}
+{#                                                    <span class="sib-wte-type-basic-summary">수정 및 삭제 확인 시 반드시 필요합니다.</span>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                            <tr>#}
+{#                                                <th scope="row">#}
+{#                                                    <label for="content" class="sib-require"><em class="hd-element">필수입력항목</em>내용</label>#}
+{#                                                </th>#}
+{#                                                <td>#}
+{#                                                    <textarea name="content" rows="10" cols="10" id="content" placeholder="내용을 입력해 주세요">{{ question.content }}</textarea>#}
+{#                                                    <span style="color:#aaa;float:right" id="counter">(0자)</span>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                            <tr>#}
+{#                                                <th scope="row">첨부파일</th>#}
+{#                                                <td>#}
+{#                                                    <div class="sib-wte-type-basic-file-item"></div>#}
+{#                                                    <div class="sib-wte-type-basic-file" data-maxcount="2" data-maxsize="5"><!-- 가능 파일수만큼 filebox 생성하고 하나만 보이게 -->#}
+{#                                                        <label class="hd-element" for="attachFile0">1번째첨부파일</label>#}
+{#                                                        <input type="file" name="attachFile0" class="attachFile" id="attachFile0" value="">#}
+{#                                                    </div>#}
+{#                                                    <p class="sib-wte-type-basic-summary2">파일 업로드 제한용량 5MB</p>#}
+{#                                                </td>#}
+{#                                            </tr>#}
+{#                                        </tbody>#}
+{#                                    </table> #}
+
+                                    <div class="sib-set-button">
+                                        <input type="password" name="password" id="password" value="" class="sib-wte-input-name">
+                                        <button type="submit" class="sib-button sib-lb-color2" id="btnUpload">삭제</button>&nbsp;<a href="#" class="sib-button sib-lb-color1" id="btnUploadCancle">취소</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+                <!-- 게시판 end-->
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -29,6 +29,7 @@ class Answer(models.Model):
     name = models.CharField(max_length=20)
     content = models.TextField()
     create_date = models.DateTimeField()
+    an_password = models.CharField(max_length=20)
 
 
     #python manage.py migrate
