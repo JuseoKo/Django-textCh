@@ -1,3 +1,16 @@
 {
-    "Data": {}
+    "Data": {
+        "Refresh": "새로 고침",
+        "Console": "콘솔",
+        "Toggle Debug Variables": "디버그 변수 전환",
+        "Add Debug Variable": "디버그 변수 추가",
+        "Enter the variable name": "변수 이름 입력",
+        "Delete Debug Variable": "디버그 변수 삭제",
+        "Enter the variable name to delete": "삭제할 변수 이름 입력",
+        "Switch HTML": "HTML 전환",
+        "Enter a value for <<$tmpVar>>": "<<$tmpVar>>값 입력",
+        "Hour": "시간",
+        "Emergency": "비상",
+        "Remove debug info": "디버그 정보 제거"
+    }
 }

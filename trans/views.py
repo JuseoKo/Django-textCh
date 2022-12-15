@@ -64,13 +64,6 @@ def pj_add(request):
     else:
         return render(request, './about/about.html', {'file_list': filenames})
 
-def lists(request):
-    filenames = pj_name_load()
-    return render(request, './about/project_list.html', {'file_list': filenames,})
-
-def about_sc(request):
-    filenames = pj_name_load()
-    return render(request, './about/about_about.html', {'file_list': filenames,})
 
 
 #return render(request, 'main/main.html') : 요청이 들어오면 main/main.html을 보여줘라

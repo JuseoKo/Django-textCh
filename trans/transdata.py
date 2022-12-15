@@ -19,15 +19,18 @@ def data_compare(datas, name):
 
 #데이터 추가기능
 def data_add(add_eg_data, add_change_data, name):
+    data_e = add_eg_data.split('\r\n')
+    data_c = add_change_data.split('\r\n')
     Data = json_load(name)
-    Data["Data"][add_eg_data] = add_change_data
+    for i in range(0, len(data_e)):
+        Data["Data"][data_e[i]] = data_c[i]
     with open(f'./trans/data/{name}.json', 'w', encoding='utf-8') as f:
         #ensure_ascii = False: 한글깨짐 방지
         json.dump(Data, f, indent=4, ensure_ascii=False)
+        # print(add_change_data, Data["Data"][add_eg_data], add_eg_data)
     return Data
 
 def add_f(name):
-    print('실행')
     Data = {
         "Data": {
 
@@ -37,6 +40,7 @@ def add_f(name):
         #ensure_ascii = False: 한글깨짐 방지
         json.dump(Data, f, indent=4, ensure_ascii=False)
     return Data
+
 # if __name__ == '__main__':
 #     # 데이터 파일 로드
 #     Data = json_load()

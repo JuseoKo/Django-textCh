@@ -7,6 +7,4 @@ urlpatterns = [
     #name은 html에서 지정할때 필요
     path('<str:file_name>/', views.main, name='tr'),
     path('add/<str:file_name>/', views.main_add, name='add'),
-    path('list/lists', views.lists, name='lists'),
-    path('set/about/', views.about_sc, name='about_sc'),
 ]
