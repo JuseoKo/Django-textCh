@@ -1,4 +1,4 @@
-{#추가수정 필요#}
+{#페이징 수정 필요#}
 {% extends 'about/base.html' %}
 {% load static %}
 <!DOCTYPE html>
@@ -6,127 +6,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     {% block tatle %}
         <title>번역 저장소 - 자유게시판</title>
     {% endblock %}
-{% block extrahead %}
-  <link rel="stylesheet" href="{% static 'css/default_board.css' %}"/>
-{% endblock %}
+
+    {% block extrahead %}
+        <link rel="stylesheet" href="{% static 'css/default_board.css' %}"/>
+    {% endblock %}
 </head>
 
 <body>
 {% block content %}
-    <section class="visual">
-      <div class="sub_menu_list">
-        <dl>
-          <dt class="now_sub">
-        </dl>
-      </div>
-          <div class="sub_content_title">
-            게시판
-          </div>
-
-            <div class="article">
-                <div class="sub_content_list">
-                    <div id="board">
-                        <form class="search_form">
-                            <select class="select" name="s[s]" title="검색타입">
-                                <option value="name">작성자</option>
-                                <option value="subject" selected="selected">제목</option>
-                            </select>
-
-                            <input type="text" class="input" name="s[q]" placeholder="검색어" title="검색어" required="">
-                            <input type="submit" class="btn" value="검색">
-                        </form>
-
-                        <table class="table border_top_blue list" summary="번호, 제목, 작성자, 작성일, 조회수로 구성되어 있는 게시판입니다.">
-                            <caption>게시판 글 리스트</caption>
-                            <colgroup>
-                                <col class="b_num" style="width: 9%;">
-                                <col>
-                                <col style="width: 18%;">
-                                <col style="width: 18%;">
-                                <col class="b_num" style="width: 10%;">
-                            </colgroup>
-
-                            <thead>
-                            <tr>
-                                <th class="border_bottom bg txt_center b_num">번호</th>
-                                <th class="border_bottom bg txt_center">제목</th>
-                                <th class="border_bottom bg txt_center">작성자</th>
-                                <th class="border_bottom bg txt_center">작성일</th>
-                                <th class="border_bottom bg txt_center">조회수</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            {% for question in question_list %}
-                            <tr>
-                                <td class="border_bottom txt_center b_num">
-                                    <small style="font-weight:bold;">{{ forloop.revcounter }}</small>
-                                </td>
-                                <td class="border_bottom subject">
-                                    <a href="{% url 'sns:contents' question.id %}">{{ question.subject }}</a>
-                                </td>
-                                <td class="border_bottom txt_center">
-                                    {{ question.name }}
-                                </td>
-                                <td class="border_bottom txt_center">{{ question.create_date }}</td>
-                                <td class="border_bottom txt_center">{{ question.clik_num }}</td>
-                            </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
-                    </div>
+    <section class="notice">
+        <div class="page-title">
+            <div class="container">
+                <h3>자유게시판</h3>
+            </div>
+        </div>
+            <!-- board seach area -->
+        <div id="board-search">
+            <div class="container">
+                <div class="search-window">
+                    <form action="">
+                        <div class="search-wrap">
+                            <label for="search" class="blind">내용 검색</label>
+                            <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
+                            <button type="submit" class="btn btn-dark">검색</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="th_but">
-                <a href="{% url 'sns:sns_create' %}">게시글 작성</a>
-            </div>
-    </section>
+        </div>
 
-    <!-- 페이징처리 시작 -->
-    <ul class="pagination justify-content-center">
-        <!-- 이전페이지 -->
-        {% if question_list.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-            </li>
-        {% endif %}
-        <!-- 페이지리스트 -->
-        {% for page_number in question_list.paginator.page_range %}
-            {% if page_number >= question_list.number|add:-5 and page_number <= question_list.number|add:5 %}
-            {% if page_number == question_list.number %}
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                </li>
-            {% else %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                </li>
-            {% endif %}
-            {% endif %}
-        {% endfor %}
-        <!-- 다음페이지 -->
-        {% if question_list.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
-            </li>
-        {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-            </li>
-        {% endif %}
-    </ul>
-<!-- 페이징처리 끝 -->
+        <!-- board list area -->
+        <div id="board-list">
+            <div class="container">
+                <table class="board-table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="th-num">번호</th>
+                        <th scope="col" class="th-title">제목</th>
+                        <th scope="col" class="th-name">작성자</th>
+                        <th scope="col" class="th-date">등록일</th>
+                        <th scope="col" class="th-click">조회수</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for question in question_list %}
+                        <tr>
+                            <td>{{ question.con_num }}</td>
+                            <th> <a href="{% url 'sns:contents' question.id %}">{{ question.subject }}</a></th>
+                            <td>{{ question.name }}</td>
+                            <td>{{ question.create_date }}</td>
+                            <td>{{ question.clik_num }}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+                <a href="{% url 'sns:sns_create' %}" type="submit" class="btn btn-dark_cr">작성</a>
+
+                <!-- 페이징처리 시작 -->
+                <div class="page_wrap">
+                    <div class="page_nation">
+{#                        한칸 앞으로#}
+                        {% if question_list.has_previous %} <!-- 이전페이지 존재시 -->
+                            <a class="arrow prev"href="?page={{ question_list.previous_page_number }}"></a>
+                        {% else %}
+                            <a class="arrow prev"href="#"></a>
+                        {% endif %}
+{#                    페이지 출력#}
+                        {% for page_number in question_list.paginator.page_range %}
+                            {% if page_number == question_list.number %}
+                                <a class="active" href="?page={{ page_number }}">{{ page_number }}</a>
+                            {% else %}
+                                <a href="?page={{ page_number }}">{{ page_number }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if question_list.has_next %}
+                            <a class="arrow next" href="?page={{ question_list.next_page_number }}"></a>
+                        {% else %}
+                            <a class="arrow next" href="#"></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- 페이징처리 끝 -->
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
-  
+
 
 </body>
 </html>

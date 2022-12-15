@@ -4,7 +4,6 @@
 }
 .title-wrap {
 	border-collapse: collapse ;
-	position: center ;
 	padding: 1%;
 	position: relative;
 	font-size: 40px;
@@ -14,12 +13,14 @@
 	position: center ;
 	padding: 5%;
 }
+
 #seoul-integrated-board {
 	font-family:"dotum", "돋움", "gulim", "굴림", "sans-serif";
 	font-size:14px;
 	line-height:1.7;
 	color:#666;
 }
+
 
 #seoul-integrated-board * {
 	margin:0;

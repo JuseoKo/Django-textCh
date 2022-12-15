@@ -1,9 +1,10 @@
+{#{% extends 'about/base.html' %}#}
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
     <title>Test Test Title</title>
     <!--파비콘-->
     <!--<link rel="shortcut icon" href="favicon.ico" />-->
@@ -17,6 +18,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="{% static './css/main.css' %}"/>
     <link rel="stylesheet" href="{% static './css/sns.css' %}"/>
+    <style>
+        {#.visual {#}
+        {#    background-color: white;#}
+
+        {#.title-wrap {#}
+        {#    border-collapse: collapse ;#}
+        {#    position: center ;#}
+        {#    padding: 1%;#}
+        {#    position: relative;#}
+        {#    font-size: 40px;#}
+
+        {##h5 {#}
+        {#    border-collapse: collapse;#}
+        {#    position: center;#}
+        {#    padding: 5%;#}
+
+        .subi {
+            border-collapse: collapse;
+            position: center;
+            padding: 50%;
+        }
+    </style>
 </head>
 <body>
 
@@ -85,54 +108,54 @@
     </div>
 </header>
 
-<body>
-    <section style="width:1800px" class="visual">
-        <div class="inner">
-            <!-- 게시판 -->
-            <div id="content" class="content spp-content spp-cont-free">
-                <div class="title-wrap">자유게시판</div>
 
-                <div id="seoul-common-board" style="opacity: 1;"><!-- rating --><!-- 댓글 --><!-- memo 리스트--><!-- liveRe --><!-- 관련글 -->
-                    <div id="seoul-integrated-board" style="width: 680px; max-width: 100%;"><!-- view -->
-                        <div class="sib-viw-type-basic">
-                            <table id="viewTable" class="viewTable">
-                                <colgroup><col class="sib-viw-type-basic-title"><col></colgroup>
-                                {#게시물#}
-                                <thead>
-                                    <tr>
-                                        <th scope="colgroup" colspan="2" class="sib-viw-type-basic-subject">
-                                            <p class="sib-viw-type-basic-subject-name">{{ question.subject }}</p>
-                                            <p class="sib-viw-type-basic-subject-info1"><!--작성자--><span class="sib-viw-type-basic-subject-info1-left">작성자 : {{ question.name }}</span></p>
-                                            <p class="sib-viw-type-basic-subject-info2"><!--                <span class="sib-viw-type-basic-subject-info2-left">2022.12.09 | 조회 0</span>-->
-                                                <span class="sib-viw-type-basic-subject-info2-left">2022.12.09</span>
-                                            </p>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" class="sib-viw-type-basic-content" id="scrabArea">{{ question.content }}
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                </tfoot>
-                            </table>
+<section style="width:1800px" class="visual">
+    <div class="inner">
+        <!-- 게시판 -->
+        <div id="content" class="content spp-content spp-cont-free">
+            <div class="title-wrap">자유게시판</div>
+
+            <div id="seoul-common-board" style="opacity: 1;"><!-- rating --><!-- 댓글 --><!-- memo 리스트--><!-- liveRe --><!-- 관련글 -->
+                <div id="seoul-integrated-board" style="width: 680px; max-width: 100%;"><!-- view -->
+                    <div class="sib-viw-type-basic">
+                        <table id="viewTable" class="viewTable">
+                            <colgroup><col class="sib-viw-type-basic-title"><col></colgroup>
+                            {#게시물#}
+                            <thead>
+                            <tr>
+                                <th scope="colgroup" colspan="2" class="sib-viw-type-basic-subject">
+                                    <p class="sib-viw-type-basic-subject-name">{{ question.subject }}</p>
+                                    <p class="sib-viw-type-basic-subject-info1"><!--작성자--><span class="sib-viw-type-basic-subject-info1-left">작성자 : {{ question.name }}</span></p>
+                                    <p class="sib-viw-type-basic-subject-info2"><!--                <span class="sib-viw-type-basic-subject-info2-left">2022.12.09 | 조회 0</span>-->
+                                        <span class="sib-viw-type-basic-subject-info2-left">2022.12.09</span>
+                                    </p>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="2" class="sib-viw-type-basic-content" id="scrabArea">{{ question.content }}
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- view --> <!-- button -->
+                    <div class="sib-set-button" data-secret="false" data-writer="an5330">
+                        <div class="sib-set-button-right">
+                            <div class="sib-set-button-left"></div>
+                            <a href="{% url 'sns:revise_page' question.id %}" class="sib-button sib-lb-color7" id="btnEdit">수정</a>&nbsp;<a href="{% url 'sns:del_page' question.id %}" class="sib-button sib-lb-color6" id="btnDelete">삭제</a>&nbsp;<a href="{% url 'sns:index' %}" class="sib-button sib-lb-color5" id="btnList">목록</a>
                         </div>
+                    </div>
 
-                        <!-- view --> <!-- button -->
-                        <div class="sib-set-button" data-secret="false" data-writer="an5330">
-                            <div class="sib-set-button-right">
-                                <div class="sib-set-button-left"></div>
-                                <a href="{% url 'sns:revise_page' question.id %}" class="sib-button sib-lb-color7" id="btnEdit">수정</a>&nbsp;<a href="{% url 'sns:del_page' question.id %}" class="sib-button sib-lb-color6" id="btnDelete">삭제</a>&nbsp;<a href="{% url 'sns:index' %}" class="sib-button sib-lb-color5" id="btnList">목록</a>
-                            </div>
-                        </div>
+                    {#댓글#}
+                    <div class="sib-viw-board-reply" id="memoWrapper">
+                        <div class="sib-viw-board-reply-title"><p>댓글 </p></div>
+                        <div id="h5" class="subi"><p>{{ question.answer_set.count }}개의 댓글이 있습니다.</p></div>
 
-                        {#댓글#}
-                        <div class="sib-viw-board-reply" id="memoWrapper">
-                            <div class="sib-viw-board-reply-title"><p>댓글 </p></div>
-                            <div id="h5">{{ question.answer_set.count }}개의 댓글이 있습니다.</div>
-                            
-                            {% for answer in question.answer_set.all %}
+                        {% for answer in question.answer_set.all %}
                             <div id="memoList">
                                 <div class="sib-viw-board-reply-article" data-writer="cys2853" data-cmno="1610651" data-cmgroup="1610651" data-cmordr="1" data-cmlevel="0" data-parentcmno="0">
                                     <p class="sib-viw-board-reply-article-title"> 작성자 : <strong>{{ answer.name }}</strong>&nbsp;<span class="articleDate">2021/12/10 00:21:02</span>
@@ -146,42 +169,26 @@
                                     <div class="sib-viw-board-reply-article-content">{{ answer.content }}</div>
                                 </div>
                             </div>
-                            {% endfor %}
-                            
-                            {#댓글등록#}
-                            <form action="{% url 'sns:answer_create' question.id %}" method="post">
-                                {% csrf_token %}
-                                <fieldset>
-                                    <legend>댓글 작성</legend>
-                                    <label class="sib-viw-board-reply-article-title">작성자 : <input class="inputReply" name="name" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력">
-                                        비밀번호 : <input type="password" class="inputReply" name="password" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력"></label></label>
-                                    <textarea class="txReply" name="content" id="bbsCmCn" rows="10" cols="10" title="댓글 입력" placeholder="댓글 작성을 해 주세요"></textarea>
-                                    <input type="submit" class="sib-button sib-lb-color2" id="btnMemoSubmit" value="답변등록">
-                                </fieldset>
-                            </form>
-                        </div>
+                        {% endfor %}
+
+                        {#댓글등록#}
+                        <form action="{% url 'sns:answer_create' question.id %}" method="post">
+                            {% csrf_token %}
+                            <fieldset>
+                                <legend>댓글 작성</legend>
+                                <label class="sib-viw-board-reply-article-title">작성자 : <input class="inputReply" name="name" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력">
+                                    비밀번호 : <input type="password" class="inputReply" name="password" id="crtrNm" maxlength="20" title="작성자" placeholder="작성자 입력"></label></label>
+                                <textarea class="txReply" name="content" id="bbsCmCn" rows="10" cols="10" title="댓글 입력" placeholder="댓글 작성을 해 주세요"></textarea>
+                                <input type="submit" class="sib-button sib-lb-color2" id="btnMemoSubmit" value="답변등록">
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-
-    </section>
-    <section class="explain">
-        <div class="inner">
-            <div class="text">
-  
-            </div>
         </div>
-    </section>
-  
-  
-    <!--TO TOP BUTTON-->
-    <div id="to-top">
-        <div class="material-icons">arrow_upward</div>
     </div>
-  
+</section>
+
 </body>
 </html>
-  
