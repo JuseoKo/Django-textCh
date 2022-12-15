@@ -1,28 +1,9 @@
-#subContent {
-    position: relative;
-    margin: 2%;
-    left: 5%;
-    display: inline-block;
-    background: #F6F5F0;
-    width: 1050px;
-    padding-left: 3px;
-    vertical-align: top;
-  
-  
-}
-
 .sub_photo {
     width: 100%;
     max-height: 270px;
     border-bottom: 3px solid #333;
     text-align: center;
     overflow: hidden;
-}
-
-.sub_content {
-    width: 150%;
-    font-size: 1rem;
-    background: #F6F5F0;
 }
 
 .sub_content_title {

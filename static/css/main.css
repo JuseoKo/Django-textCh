@@ -16,6 +16,35 @@ img {
   /* img(인라인 요소) 하단에 Baseline 공백을 제거 */
   display: block;
 }
+/*메인*/
+.about{
+  border-collapse: collapse ;
+  position: center ;
+  padding: 5%;
+}
+.pj_new{
+  position: relative;
+  font-size: 80px;
+  margin: 5%;
+}
+.pj_name{
+  position: relative;
+  font-size: 40px;
+}
+.pj_add{
+  position: relative;
+  font-size: 30px;
+  color: #c8c8c8;
+}
+button {
+  font-size: 30px;
+  margin: 1%;
+  cursor: pointer;
+}
+.pj_link {
+  font-size: 20px;
+}
+/*메인*/
 
 /**/
 .inner {

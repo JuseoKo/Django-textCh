@@ -1,4 +1,19 @@
 /***************************** basic reset *****************************/
+.visual {
+	background-color: white;
+}
+.title-wrap {
+	border-collapse: collapse ;
+	position: center ;
+	padding: 1%;
+	position: relative;
+	font-size: 40px;
+}
+#h5 {
+	border-collapse: collapse ;
+	position: center ;
+	padding: 5%;
+}
 #seoul-integrated-board {
 	font-family:"dotum", "돋움", "gulim", "굴림", "sans-serif";
 	font-size:14px;
