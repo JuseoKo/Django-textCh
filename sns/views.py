@@ -9,8 +9,6 @@ from django.core.paginator import Paginator
 from django.db.models import Max
 filenames = pj_name_load()
 
-
-
 #게시글 목록
 def index(request):
     question_list = Question.objects.order_by('-create_date')
@@ -68,7 +66,7 @@ def revise(request, question_id):
             question.save()
             return render(request, 'sns/content.html', {'question': question})
         else:
-            return render(request, 'sns/content.html', {'question': question})
+            return redirect('sns:erorr')
     else:
         return render(request, 'sns/sns_create_revise.html', {'question': question, 'file_list': filenames})
 
@@ -79,6 +77,11 @@ def dl(request, question_id):
             question.delete()
             return redirect('sns:index')
         else:
-            return redirect('sns:index')
+            return redirect('sns:erorr')
     else:
         return render(request, 'sns/sns_create_del.html', {'question': question, 'file_list': filenames})
+
+def erorr(request):
+    if request.method == 'POST':
+        return redirect('sns:index')
+    return render(request, 'sns/sns_create_del_erorr.html', {'file_list': filenames})

@@ -19,5 +19,6 @@ urlpatterns = [
     path('revise/<int:question_id>/', views.revise, name='revise_page'),
     #제거
     path('del/<int:question_id>/', views.dl, name='del_page'),
+    path('erorr/', views.erorr, name='erorr'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
