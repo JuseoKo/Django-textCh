@@ -7,11 +7,16 @@ body {
   line-height: 1.4;
   color: #333;
 }
-a {
+
+.main_a {
   text-decoration: none;
-  color : green;
+  color: black;
 }
 
+.sub_a {
+  text-decoration: none;
+  color: white;
+}
 img {
   /* img(인라인 요소) 하단에 Baseline 공백을 제거 */
   display: block;
@@ -215,6 +220,12 @@ header .main-menu .item .item__contents .contents__texture p {
   height: 686px;
 }
 
+.main_vi {
+  font-size: 2.5em;
+  padding: 20px;
+  text-align: center;
+  /*color: #f8f8f8;*/
+}
 
 
 

@@ -27,7 +27,7 @@
             <a href="/" class="logo">
                 <img src="{% static './img/favicon.png' %}" alt="MAIN"/>
             </a>
-
+            <h1 class="main_vi">번역 저장소</h1>
             <div class="sub-menu">
                 <ul class="menu">
                     <li>
@@ -45,7 +45,7 @@
             <ul class="main-menu">
                 <li class="item">
                     <div class="item__name">
-                        <a href="{% url 'sns:index' %}">게시판</a>
+                        <a class="main_a" href="{% url 'sns:index' %}">게시판</a>
                     </div>
                 </li>
                 <li class="item">
@@ -55,7 +55,7 @@
                                 <ul class="inner">
                                     {% for item in file_list %}
                                         <li>
-                                            <a href="{% url 'trans:add' item %}">{{ item }}</a>
+                                            <a class="sub_a" href="{% url 'trans:add' item %}">{{ item }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -64,13 +64,13 @@
                     </div>
                 </li>
                 <li class="item">
-                    <div class="item__name">번역 문구 찾기
+                    <div class="item__name">번역 문구 검색
                         <div class="item__contents">
                             <div class="contents__menu">
                                 <ul class="inner">
                                     {% for item in file_list %}
                                         <li>
-                                            <a href="{% url 'trans:tr' item %}">{{ item }}</a>
+                                            <a class="sub_a" href="{% url 'trans:tr' item %}">{{ item }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
