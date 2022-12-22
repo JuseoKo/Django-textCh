@@ -1,5 +1,6 @@
 from django import forms
 from sns.models import Question
+# from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -11,3 +12,6 @@ class QuestionForm(forms.ModelForm):
             'content' : '내용',
             'su_password' : '비밀번호',
         }
+        # widgets = {
+        #     'content' : forms.
+        # }

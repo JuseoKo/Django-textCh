@@ -1,31 +1,31 @@
 from django.db import models
+#각종 글작성시 효과 툴
+from ckeditor.fields import RichTextField
 
 
 class Question(models.Model):
     #생성된 게시글 숫자
     subject = models.CharField(max_length=200)
     name = models.CharField(max_length=20)
-    content = models.TextField()
     create_date = models.DateTimeField()
-
 
     # 게시글 넘버링
     con_num = models.PositiveIntegerField(default=0)
     # 수정, 삭제 권한
     su_password = models.CharField(max_length=20)
-    #생성된 게시글 수
-    # def num(self):
-    #     self.con_num += 1
-    #     self.save()
     #조회수
     clik_num = models.PositiveIntegerField(default=0)
     def click(self):
         self.clik_num += 1
         self.save()
+    #각종 글설정 툴
+    content = RichTextField()
 
 
 class Answer(models.Model):
+    #참조시키기
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    #
     name = models.CharField(max_length=20)
     content = models.TextField()
     create_date = models.DateTimeField()

@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 from trans import views as tviews
-from sns import views as sviews
+
 app_name = 'base'
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('', tviews.abuot),
     path('js/', tviews.pj_add, name='pj_add'),
     path('sns/', include('sns.urls')),
-]
+    ]
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

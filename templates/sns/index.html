@@ -54,12 +54,12 @@
                     </thead>
 
                     <tbody>
-                    {% for question in question_paging %}
+                    {% for question in question_list %}
                         <tr>
-                            <td>{{ question.num }}</td>
+                            <td>{{ question.con_num }}</td>
                             <th> <a href="{% url 'sns:contents' question.id %}">{{ question.subject }}</a></th>
                             <td>{{ question.name }}</td>
-                            <td>{{ question.create_date }}</td>
+                            <td>{{ question.create_date|date:'Y-m-d H:i' }}</td>
                             <td>{{ question.clik_num }}</td>
                         </tr>
                     </tbody>
@@ -67,31 +67,29 @@
                 </table>
                 <a href="{% url 'sns:sns_create' %}" type="submit" class="btn btn-dark_cr">작성</a>
 
-                <!-- 페이징처리 시작 -->
+
                 <div class="page_wrap">
                     <div class="page_nation">
-{#                        한칸 앞으로#}
-                        {% if question_paging.has_previous %} <!-- 이전페이지 존재시 -->
-                            <a class="arrow prev"href="?page={{ question_paging.previous_page_number }}"></a>
+                        {% if question_list.has_previous %}
+                        <a class="arrow prev"href="?page={{ question_list.previous_page_number }}"></a>
                         {% else %}
-                            <a class="arrow prev"href="#"></a>
+                        <a class="arrow prev"href="#"></a>
                         {% endif %}
 {#                    페이지 출력#}
-                        {% for page_number in question_paging.paginator.page_range %}
-                            {% if page_number == question_paging.number %}
+                        {% for page_number in question_list.paginator.page_range %}
+                            {% if page_number == question_list.number %}
                                 <a class="active" href="?page={{ page_number }}">{{ page_number }}</a>
                             {% else %}
                                 <a href="?page={{ page_number }}">{{ page_number }}</a>
                             {% endif %}
                         {% endfor %}
-                        {% if question_paging.has_next %}
-                            <a class="arrow next" href="?page={{ question_paging.next_page_number }}"></a>
+                        {% if question_list.has_next %}
+                            <a class="arrow next" href="?page={{ question_list.next_page_number }}"></a>
                         {% else %}
                             <a class="arrow next" href="#"></a>
                         {% endif %}
                     </div>
                 </div>
-                <!-- 페이징처리 끝 -->
             </div>
         </div>
     </section>
