@@ -42,7 +42,6 @@ def answer_create(request, question_id):
 def sns_create(request):
     #작성확인 버튼 누를시
     if request.method == 'POST':
-        print(request.POST)
         question = Question(con_num=int(list(Question.objects.aggregate(Max('con_num')).values())[0]) + 1,
                             create_date= timezone.now(),
                             content=request.POST['content'],
