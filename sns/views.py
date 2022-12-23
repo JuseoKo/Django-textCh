@@ -71,7 +71,9 @@ def revise(request, question_id):
         else:
             return redirect('sns:erorr')
     else:
-        return render(request, 'sns/sns_create_revise.html', {'question': question, 'file_list': filenames})
+        #폼에 초기값 삽입
+        form = QuestionForm(initial={'content': question.content})
+        return render(request, 'sns/sns_create_revise.html', {'question': question, 'file_list': filenames, 'form': form})
 
 def dl(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -80,11 +82,6 @@ def dl(request, question_id):
             question.delete()
             return redirect('sns:index')
         else:
-            return redirect('sns:erorr')
+            return render(request, 'sns/sns_create_del_erorr.html', {'question': question, 'file_list': filenames})
     else:
         return render(request, 'sns/sns_create_del.html', {'question': question, 'file_list': filenames})
-
-def erorr(request):
-    if request.method == 'POST':
-        return redirect('sns:index')
-    return render(request, 'sns/sns_create_del_erorr.html', {'file_list': filenames})

@@ -12,6 +12,9 @@ class QuestionForm(forms.ModelForm):
             'content' : '내용',
             'su_password' : '비밀번호',
         }
-        # widgets = {
-        #     'content' : forms.
-        # }
+        help_texts = {
+            'content': 'Some useful help text.'
+        }
+        widgets = {
+            'content' : '하나찌'
+        }
