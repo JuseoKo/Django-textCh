@@ -1,6 +1,6 @@
 from django.db import models
 #각종 글작성시 효과 툴
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Question(models.Model):
@@ -19,7 +19,7 @@ class Question(models.Model):
         self.clik_num += 1
         self.save()
     #각종 글설정 툴
-    content = RichTextField()
+    content = RichTextUploadingField()
 
 
 class Answer(models.Model):

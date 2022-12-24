@@ -13,5 +13,5 @@ urlpatterns = [
     path('', tviews.abuot),
     path('js/', tviews.pj_add, name='pj_add'),
     path('sns/', include('sns.urls')),
-    ]
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

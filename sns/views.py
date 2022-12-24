@@ -12,13 +12,17 @@ filenames = pj_name_load()
 #게시글 목록
 def index(request):
     question_list = Question.objects.order_by('-create_date')
-
-    page = request.GET.get('page', '1')  # 페이지 , url에 ?page=1 추가해서 보여주기
+    search = request.GET.get('search')
+    #검색
+    if search != None:
+        question_list = question_list.filter(content__icontains=search)
+    #페이징
     paginator = Paginator(question_list, 10)  # 페이지당 10개씩 보여주기
+    #페이징 계속
+    page = request.GET.get('page', '1')  # 페이지 , url에 ?page=1 추가해서 보여주기
     page_obj = paginator.get_page(page) # 객체 생성
-
     return render(request, 'sns/index.html', {'file_list': filenames,
-                                              'question_list': page_obj})
+                                                  'question_list': page_obj, 'search': search})
 
 #게시글 내용
 def contents(request, content_id):
@@ -61,11 +65,9 @@ def sns_create(request):
 def revise(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     if request.method == 'POST':
-        if question.su_password == request.POST['password']:
-            question.subject = request.POST['subject']
-            question.name = request.POST['name']
-            question.content = request.POST['content']
-            question.create_date = timezone.now()
+        if question.su_password == request.POST['su_password']:
+            question = Question(subject=request.POST['subject'], name=request.POST['name'],
+                                content=request.POST['content'],create_date=timezone.now())
             question.save()
             return render(request, 'sns/content.html', {'question': question})
         else:
@@ -74,7 +76,7 @@ def revise(request, question_id):
         #폼에 초기값 삽입
         form = QuestionForm(initial={'content': question.content})
         return render(request, 'sns/sns_create_revise.html', {'question': question, 'file_list': filenames, 'form': form})
-
+#글삭제 기능
 def dl(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     if request.method == 'POST':
