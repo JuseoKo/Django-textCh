@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'sns.apps.SnsConfig',
+    'trans.apps.TransConfig',
+    'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,8 +127,12 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
+#이미지
 CKEDITOR_UPLOAD_PATH = 'media/'
+#로그인 성공후 경로
+LOGIN_REDIRECT_URL = '/'
+#로그아웃 경로
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Default primary key field type

@@ -1,0 +1,40 @@
+{% extends 'about/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block tatle %}
+        <title>번역 저장소-login</title>
+    {% endblock %}
+    {% block extrahead %}
+        <link rel="stylesheet" href="{% static './css/login.css' %}"/>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<header>
+</header>
+<section class="notice">
+<form method="POST" action="{% url 'login:login' %}">
+    {% csrf_token %}
+    <div class="input-box">
+{#        <input id="username" type="text" name="username" placeholder="아이디" value="{{ form.username.value|default_if_none:'' }}">#}
+        <input id="username" type="text" name="username" placeholder="아이디">
+        <label for="username">아이디</label>
+    </div>
+
+    <div class="input-box">
+{#        <input id="password" type="password" name="password" placeholder="비밀번호" value="{{ form.password.value|default_if_none:'' }}">#}
+        <input id="password" type="password" name="password" placeholder="비밀번호">
+        <label for="password">비밀번호</label>
+    </div>
+    <div id="forgot">비밀번호 찾기</div>
+    <input type="submit" value="로그인">
+</form>
+</section>
+{% endblock %}
+</body>
+</html>
