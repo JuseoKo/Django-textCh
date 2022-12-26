@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,8 +130,10 @@ STATICFILES_DIRS = [
 CKEDITOR_UPLOAD_PATH = 'media/'
 #로그인 성공후 경로
 LOGIN_REDIRECT_URL = '/'
-#로그아웃 경로
+# 로그아웃 경로
 LOGOUT_REDIRECT_URL = '/'
+#유저 커스텀
+# AUTH_USER_MODEL = 'login.User'
 
 
 # Default primary key field type

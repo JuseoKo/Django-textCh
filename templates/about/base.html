@@ -34,7 +34,7 @@
                         <a class="nav-link" href="{% url 'login:logout' %}">{{ user.username }} (로그아웃)</a>
                     {% else %}
                         <li>
-                            <a href="https://github.com/">Sign In</a>
+                            <a href="{% url 'login:sign' %}">Sign In</a>
                         </li>
                         <li>
                             <a href="{% url 'login:login' %}">Login</a>

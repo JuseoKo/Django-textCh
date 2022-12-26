@@ -5,7 +5,6 @@ from .forms import QuestionForm
 from trans.views import pj_name_load
 #페이징
 from django.core.paginator import Paginator
-
 from django.db.models import Max
 filenames = pj_name_load()
 
