@@ -22,16 +22,14 @@
         <div class="container" role="main">
             <form method="POST">
                 {% csrf_token %}
-                <div class="mb-3">
-                    <label for="reg_id">작성자
-                        <input type="text" class="form-control" name="name" id="name" value="{{ question.name }}">
-                    </label>
-                </div>
+                {% if user.is_authenticated %}
+                {% else %}
                 <div class="mb-3">
                     <label for="reg_id">비밀번호
                         <input type="password" class="form-control" name="su_password" placeholder="비밀번호">
                     </label>
                 </div>
+                {% endif %}
                 <div class="mb-3">
                     <label for="title">제목
                         <input type="text" class="form-control" id="subject" name="subject" value="{{ question.subject }}">

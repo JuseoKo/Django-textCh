@@ -12,7 +12,6 @@ def pj_name_load():
 
 #메인페이지
 def abuot(request):
-
     #하위 디렉토리 이름을 이름정렬 순으로 리스트화
     filenames = pj_name_load()
 
@@ -22,7 +21,6 @@ def abuot(request):
 #url에 file_name 즉 매개변수로 설정했으니 이 함수에서 받아와야함
 #번역페이지
 def main(request, file_name):
-
     filenames = pj_name_load()
 
     if request.method == 'POST':

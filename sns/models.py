@@ -9,8 +9,6 @@ class Question(models.Model):
     name = models.CharField(max_length=20)
     create_date = models.DateTimeField()
 
-    # 게시글 넘버링
-    con_num = models.PositiveIntegerField(default=0)
     # 수정, 삭제 권한
     su_password = models.CharField(max_length=20)
     #조회수
@@ -20,6 +18,7 @@ class Question(models.Model):
         self.save()
     #각종 글설정 툴
     content = RichTextUploadingField()
+    user_name = models.CharField(max_length=200)
 
 
 class Answer(models.Model):

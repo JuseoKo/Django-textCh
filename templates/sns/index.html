@@ -54,7 +54,7 @@
                     <tbody>
                     {% for question in question_list %}
                         <tr>
-                            <td>{{ question.con_num }}</td>
+                            <td>{{ question.id }}</td>
                             <th> <a href="{% url 'sns:contents' question.id %}">{{ question.subject }}</a></th>
                             <td>{{ question.name }}</td>
                             <td>{{ question.create_date|date:'Y-m-d H:i' }}</td>

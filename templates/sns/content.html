@@ -49,9 +49,13 @@
                     {% csrf_token %}
                     <fieldset>
                         <legend>댓글 작성</legend>
-                        <label>작성자 : <input name="name" maxlength="6" title="작성자" placeholder="작성자 입력">
-                            비밀번호 : <input type="password"name="password" maxlength="20" title="작성자" placeholder="작성자 입력"></label>
-                        <textarea name="content" rows="4" cols="4" title="댓글 입력" placeholder="댓글 작성을 해 주세요"></textarea>
+                        {% if user.is_authenticated %}
+                            <textarea name="content" rows="4" cols="4" title="댓글 입력" placeholder="댓글 작성을 해 주세요"></textarea>
+                        {% else %}
+                            <label>작성자 : <input name="name" maxlength="6" title="작성자" placeholder="작성자 입력">
+                                비밀번호 : <input type="password"name="password" maxlength="20" title="작성자" placeholder="작성자 입력"></label>
+                            <textarea name="content" rows="4" cols="4" title="댓글 입력" placeholder="댓글 작성을 해 주세요"></textarea>
+                        {% endif %}
                         <input type="submit" value="답변등록">
                     </fieldset>
                 </form>
@@ -65,8 +69,8 @@
                     <tbody>
                     {% for answer in question.answer_set.all %}
                     <tr>
-                        <td>작성자 : {{ answer.name }}<br>작성일 : {{ answer.create_date|date:'y-m-d H:i' }}</td>
-                        <td>{{ answer.content }}</td>
+                        <td>작성자 : {{ answer.name }}<br>{{ answer.content }}</td>
+                        <td>작성일 : {{ answer.create_date|date:'y-m-d H:i' }}</td>
                     </tr>
                     {% endfor %}
                 </table>

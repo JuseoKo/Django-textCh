@@ -19,9 +19,15 @@
     <section class="notice">
             <div id="btn_group">
                 <form method="get">
-                    <label class="ce">
-                        <button>비밀번호를 다시 확인해주세요</button>&nbsp;
-                    </label>
+                    {% if user.username == question.user_name %}
+                        <label class="ce">
+                            <button>비밀번호가 다릅니다</button>&nbsp;
+                        </label>
+                    {% else %}
+                        <label class="ce">
+                            <button>계정을 확인해주세요</button>&nbsp;
+                        </label>
+                    {% endif %}
                 </form>
             </div>
     </section>

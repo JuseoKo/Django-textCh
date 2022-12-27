@@ -22,6 +22,8 @@
         <div class="container" role="main">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                {% if user.is_authenticated %}
+                {% else %}
                 <div class="mb-3">
                     <label for="reg_id">작성자
                         <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력해 주세요">
@@ -32,6 +34,7 @@
                         <input type="password" class="form-control" name="su_password" id="name" placeholder="비밀번호">
                     </label>
                 </div>
+                {% endif %}
                 <div class="mb-3">
                     <label for="title">제목
                         <input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력해 주세요">
