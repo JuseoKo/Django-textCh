@@ -46,44 +46,60 @@ def answer_create(request, question_id):
 
 #글쓰기 기능
 def sns_create(request):
+    form = QuestionForm(request.POST or None)
     #작성확인 버튼 누를시
     if request.method == 'POST':
-        #로그인 확인
-        if request.user.is_authenticated:
-            paw, name = '1234', request.user.username
+        if form.is_valid():
+            #로그인 확인
+            if request.user.is_authenticated:
+                paw, name = '1234', request.user.username
+            else:
+                paw, name = request.POST['su_password'], request.POST['name']
+            question = Question(create_date= timezone.now(),
+                                content=request.POST['content'],
+                                name=name,
+                                su_password=paw,
+                                subject=request.POST['subject'],
+                                clik_num=0,
+                                #암호화 해서 저장하지 않으면 해킹에 취약할 수 있음
+                                user_name=request.user.username
+                                )
+            question.save()
+            return redirect('sns:index')
         else:
-            paw, name = request.POST['su_password'], request.POST['name']
-        question = Question(create_date= timezone.now(),
-                            content=request.POST['content'],
-                            name=name,
-                            su_password=paw,
-                            subject=request.POST['subject'],
-                            clik_num=0,
-                            #암호화 해서 저장하지 않으면 해킹에 취약할 수 있음
-                            user_name=request.user.username
-                            )
-        question.save()
-        return redirect('sns:index')
+            errors_list = list(form.errors)
+            return render(request, 'sns/sns_create.html', {'form': form, 'error_list': errors_list, })
     #페이지 오픈시
-    else:
-        form = QuestionForm()
     return render(request, 'sns/sns_create.html', {'form': form, 'file_list': filenames})
 
 #글 수정 기능
 def revise(request, question_id):
         question = get_object_or_404(Question, pk=question_id)
+        #폼에 초기값 삽입
+        form = QuestionForm(initial={'content': question.content})
         #유저확인
         if request.user.username == question.user_name:
             if request.method == 'POST':
-                if request.user.is_authenticated or question.su_password == request.POST['su_password']:
-                    question.content=request.POST['content']
-                    question.subject=request.POST['subject']
-                    question.create_date= timezone.now()
-                    question.save()
-                    return render(request, 'sns/content.html', {'question': question})
+                er_form = QuestionForm(request.POST or None)
+                if er_form.is_valid():
+                    if request.user.is_authenticated or question.su_password == request.POST['su_password']:
+                        #question = Question(content = request.POST['content'],
+                        # subject = request.POST['subject'],
+                        #create_date = timezone.now()
+                        #)
+                        question.content = request.POST['content']
+                        question.subject = request.POST['subject']
+                        question.name = question.name
+                        question.save()
+                        return render(request, 'sns/content.html', {'question': question})
+                else:
+                    errors_list = list(er_form.errors)
+                    print(errors_list)
+                    return render(request, 'sns/sns_create_revise.html', {'question': question,
+                                                                          'error_list': errors_list, 'form': form})
             else:
                 #폼에 초기값 삽입
-                form = QuestionForm(initial={'content': question.content})
+                #form = QuestionForm(initial={'content': question.content})
                 return render(request, 'sns/sns_create_revise.html', {'question': question,
                                                                       'file_list': filenames, 'form': form})
         #에러창 만들어야함

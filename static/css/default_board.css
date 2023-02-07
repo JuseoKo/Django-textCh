@@ -9,6 +9,10 @@ section.notice {
     background-color: #f8f8f8;
 }
 
+.hid {
+    display: none;
+}
+
 .page-title {
     margin-bottom: 60px;
 }

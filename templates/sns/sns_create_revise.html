@@ -23,19 +23,30 @@
             <form method="POST">
                 {% csrf_token %}
                 {% if user.is_authenticated %}
+                    <label class="hid"><input name="su_password" value="None"></label>
                 {% else %}
                 <div class="mb-3">
                     <label for="reg_id">비밀번호
+                        {% if 'su_password' in error_list %}
+                            <a>필수 입력항목 입니다.</a>
+                        {% endif %}
                         <input type="password" class="form-control" name="su_password" placeholder="비밀번호">
                     </label>
                 </div>
                 {% endif %}
+                <label class="hid"><input name="name" value="None"></label>
                 <div class="mb-3">
                     <label for="title">제목
+                        {% if 'subject' in error_list %}
+                            <a>필수 입력항목 입니다.</a>
+                        {% endif %}
                         <input type="text" class="form-control" id="subject" name="subject" value="{{ question.subject }}">
                     </label>
                 </div>
                 <div class="mb-3">
+                    {% if 'content' in error_list %}
+                        <a>필수 입력항목 입니다.</a>
+                    {% endif %}
                     <div class="django-ckeditor-widget" name="content">
                         {{ form.media }}
                         {{ form.content }}
