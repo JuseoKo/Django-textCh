@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from .models import User
 
 def logins(request):
     if request.method == 'POST':
@@ -14,7 +13,10 @@ def logins(request):
 def sign(request):
     if request.method == "POST":
         if request.POST['password1'] == request.POST['password2']:
-            user = User.objects.create_user(username=request.POST['userid'], password=request.POST['password1'])
+            user = User.objects.create_user(id=request.POST['userid'], password=request.POST['password1'],
+                                            email=request.POST['email'])
             user.save()
-            return redirect('index')
+            user = authenticate(username=request.POST['userid'], password=request.POST['password1'])  # 사용자 인증
+            login(request, user)
+            return redirect('sns:index')
     return render(request, './login/sign.html')

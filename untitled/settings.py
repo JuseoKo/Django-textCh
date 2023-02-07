@@ -133,7 +133,7 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃 경로
 LOGOUT_REDIRECT_URL = '/'
 #유저 커스텀
-# AUTH_USER_MODEL = 'login.User'
+AUTH_USER_MODEL = 'login.User'
 
 
 # Default primary key field type

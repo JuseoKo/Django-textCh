@@ -35,7 +35,7 @@ def contents(request, content_id):
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     if request.user.is_authenticated:
-        answer = Answer(question=question, content=request.POST['content'], name=request.user.username,
+        answer = Answer(question=question, content=request.POST['content'], name=request.user.id,
                         create_date=timezone.now(), an_password='1234')
     else:
         answer = Answer(question=question, content=request.POST['content'], name=request.POST['name'],
@@ -52,7 +52,7 @@ def sns_create(request):
         if form.is_valid():
             #로그인 확인
             if request.user.is_authenticated:
-                paw, name = '1234', request.user.username
+                paw, name = '1234', request.user.id
             else:
                 paw, name = request.POST['su_password'], request.POST['name']
             question = Question(create_date= timezone.now(),
@@ -62,7 +62,7 @@ def sns_create(request):
                                 subject=request.POST['subject'],
                                 clik_num=0,
                                 #암호화 해서 저장하지 않으면 해킹에 취약할 수 있음
-                                user_name=request.user.username
+                                user_name=request.user.id
                                 )
             question.save()
             return redirect('sns:index')
@@ -78,7 +78,7 @@ def revise(request, question_id):
         #폼에 초기값 삽입
         form = QuestionForm(initial={'content': question.content})
         #유저확인
-        if request.user.username == question.user_name:
+        if request.user.id == question.user_name:
             if request.method == 'POST':
                 er_form = QuestionForm(request.POST or None)
                 if er_form.is_valid():
@@ -108,7 +108,7 @@ def revise(request, question_id):
 def dl(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     #로그인되어있는 경우 자기 게시물이 맞다면 삭제
-    if request.user.is_authenticated and request.user.username == question.user_name:
+    if request.user.is_authenticated and request.user.id == question.user_name:
         question.delete()
         return redirect('sns:index')
 
@@ -124,7 +124,7 @@ def dl(request, question_id):
 
     #로그인 아닐경우 비밀번호 확인
     else:
-        if request.user.username == question.user_name:
+        if request.user.id == question.user_name:
             return render(request, 'sns/sns_create_del.html', {'question': question, 'file_list': filenames})
         else:
             return render(request, 'sns/sns_create_del_erorr.html', {'question': question, 'file_list': filenames})

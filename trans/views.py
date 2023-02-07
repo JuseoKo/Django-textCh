@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .transdata import data_compare, data_add, add_f
 import os
+from sns.models import Question
+from django.utils import timezone
 
 def pj_name_load():
     filenames = os.listdir('./trans/data/')
@@ -14,6 +16,17 @@ def pj_name_load():
 def abuot(request):
     #하위 디렉토리 이름을 이름정렬 순으로 리스트화
     filenames = pj_name_load()
+
+    # for i in range(0, 40):
+    #     question = Question(create_date=timezone.now(),
+    #                         content='테스트',
+    #                         name='테스터',
+    #                         su_password='1234',
+    #                         subject='테스트 게시물',
+    #                         clik_num=0,
+    #                         #암호화 해서 저장하지 않으면 해킹에 취약할 수 있음
+    #                         )
+    #     question.save()
 
     return render(request, 'about/about.html', {'file_list': filenames})
 

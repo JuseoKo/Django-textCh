@@ -23,6 +23,8 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if user.is_authenticated %}
+                    <label class="hid"><input name="name" value="None"></label>
+                    <label class="hid"><input name="su_password" value="None"></label>
                 {% else %}
                     <div class="mb-3">
                         <label for="reg_id">작성자

@@ -18,7 +18,7 @@ class Question(models.Model):
         self.save()
     #각종 글설정 툴
     content = RichTextUploadingField()
-    user_name = models.CharField(max_length=200)
+    user_name = models.CharField(max_length=200, null=True)
 
 
 class Answer(models.Model):

@@ -32,7 +32,7 @@
                 <ul class="menu">
                     {% if user.is_authenticated %}
                         <li>
-                            <a href="{% url 'login:logout' %}">{{ user.username }} (로그아웃)</a>
+                            <a href="{% url 'login:logout' %}">{{ user.id }} (로그아웃)</a>
                         </li>
                         <li>
                             <a href="{% url 'login:login' %}">내정보</a>
