@@ -1,6 +1,6 @@
 #파이썬 버전
-FROM python:3.10.5
-
+#FROM python:3.10.5
+FROM --platform=linux/amd64 python:3.10.5-slim-buster as build
 # 작업디렉토리 설정
 WORKDIR /app
 
@@ -14,6 +14,5 @@ COPY . .
 
 # Expose the port 8000
 EXPOSE 8000
-
 # Start the application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
