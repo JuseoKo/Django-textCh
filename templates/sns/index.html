@@ -11,7 +11,7 @@
     {% endblock %}
 
     {% block extrahead %}
-        <link rel="stylesheet" href="{% static 'css/default_board.css' %}"/>
+        <link rel="stylesheet" href="{% static './css/default_board.css' %}"/>
     {% endblock %}
 </head>
 
@@ -23,7 +23,7 @@
                 <h3>자유게시판</h3>
             </div>
         </div>
-            <!-- board seach area -->
+        <!-- board seach area -->
         <div id="board-search">
             <div class="container">
                 <div class="search-window">
@@ -60,7 +60,7 @@
                             <td>{{ question.create_date|date:'Y-m-d H:i' }}</td>
                             <td>{{ question.clik_num }}</td>
                         </tr>
-                    </tbody>
+                        </tbody>
                     {% endfor %}
                 </table>
                 <a href="{% url 'sns:sns_create' %}" type="submit" class="btn btn-dark_cr">작성</a>
@@ -73,7 +73,7 @@
                         {% else %}
                             <a class="arrow prev"href="#"></a>
                         {% endif %}
-{#                    페이지 출력#}
+                        {#                    페이지 출력#}
                         {% for page_number in question_list.paginator.page_range %}
                             {% if page_number == question_list.number %}
                                 {% if search != None %}

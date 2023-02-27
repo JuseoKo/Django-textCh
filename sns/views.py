@@ -5,7 +5,6 @@ from .forms import QuestionForm
 from trans.views import pj_name_load
 #페이징
 from django.core.paginator import Paginator
-from django.db.models import Max
 filenames = pj_name_load()
 
 #게시글 목록
@@ -115,12 +114,12 @@ def dl(request, question_id):
     #비밀번호 확인
     if request.method == 'POST':
         #로그인 안되어있는 경우
-        try:
-            if request.user.is_authenticated or question.su_password == request.POST['su_password']:
+            print(question.su_password, request.POST['password'])
+            if question.su_password == request.POST['password']:
                 question.delete()
                 return redirect('sns:index')
-        except:
-            return render(request, 'sns/sns_create_del_erorr.html', {'question': question, 'file_list': filenames})
+            else:
+                return render(request, 'sns/sns_create_del_erorr.html', {'question': question, 'file_list': filenames})
 
     #로그인 아닐경우 비밀번호 확인
     else:
