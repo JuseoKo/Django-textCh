@@ -8,6 +8,8 @@ WORKDIR /app
 RUN pip3 install django
 RUN pip3 install django-ckeditor
 RUN pip3 install django-js-asset
+RUN pip3 install mysqlclient
+RUN pip3 install gunicorn
 
 # 명령어를 실행하는 디렉토리 내부에 있는 모든 파일을 /app에 복사
 COPY . .
