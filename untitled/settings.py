@@ -22,6 +22,8 @@ SECRET_KEY = 'django-insecure-w00d+16b5s98tls8dop6um^nto^6mal-q@ni=uqmozge!xlo1b
 
 DEBUG = True
 
+
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -76,6 +78,7 @@ WSGI_APPLICATION = 'untitled.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -142,3 +145,4 @@ AUTH_USER_MODEL = 'login.User'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

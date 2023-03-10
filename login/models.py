@@ -35,27 +35,24 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
-
+    #로그인(id)가 무엇인지 선정
     USERNAME_FIELD = 'id'
+
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return self.email
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
         return True
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
         return self.is_admin
 
 
-# Create your models here.
 #python manage.py migrate
 #python manage.py makemigrations
